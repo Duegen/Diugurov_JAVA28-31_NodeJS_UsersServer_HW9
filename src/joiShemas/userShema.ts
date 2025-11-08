@@ -4,7 +4,7 @@ export const userIdShema = Joi.object({
     userId: Joi.number().integer().min(1).max(1000).required(),
 })
 
-export const userIdNameShema = Joi.object({
+export const userShema = Joi.object({
     userId: Joi.number().integer().min(1).max(1000).required(),
     userName: Joi.string().alphanum().min(3).max(15).required(),
 })

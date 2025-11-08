@@ -10,7 +10,7 @@ postsRouter.get("/", (req, res) => {
         controller.getAllPosts(req, res);
 })
 
-postsRouter.get("/user", (req, res) => {
+postsRouter.get("/user/:userName", (req, res) => {
     controller.getPostsByUserName(req, res);
 })
 

@@ -6,4 +6,8 @@ export interface UserService{
     getAllUsers(): User[] | null;
     getUserById(userId: Number): User;
     updateUser(userId:Number, newName:string): boolean;
+    getUsersByName(userName:string): User[];
+    setDefaultDatabase(): void;
+    getDatabase(): User[];
+    setDatabase(users: User[]): void;
 }

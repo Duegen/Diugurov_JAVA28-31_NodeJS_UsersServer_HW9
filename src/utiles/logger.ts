@@ -83,6 +83,7 @@ myLogger.on('logged', (message: string | string[], type) => {
         message.forEach(message => {
             result += JSON.stringify({date: new Date().toISOString(), message, type}) + '\n';
         })
+        result = result.slice(0, -1);
     }
     console.log(result);
 });
@@ -102,10 +103,10 @@ myLogger.on('saveToFile', (filePath: string, message: string | string[], type: s
         } else {
             let result = "";
             if (typeof message === 'string')
-                result = JSON.stringify({date: new Date().toISOString(), message, type});
+                result = JSON.stringify({date: new Date().toISOString(), message, type}) + '\n';
             else{
                 message.forEach(message => {
-                    result += JSON.stringify({date: new Date().toISOString(), message, type});
+                    result += JSON.stringify({date: new Date().toISOString(), message, type}) + '\n';
                 })
             }
             fs.appendFile(filePath, result, (err: any) => {
@@ -118,10 +119,10 @@ myLogger.on('saveToFile', (filePath: string, message: string | string[], type: s
 myLogger.on('stop', (filePath: string, message: string | string[], type: string) => {
     if (myLogger.logfileExist()) {
         let result = "";
-        if (typeof message === 'string') result = JSON.stringify({date: new Date().toISOString(), message, type});
+        if (typeof message === 'string') result = JSON.stringify({date: new Date().toISOString(), message, type}) +'\n';
         else {
             message.forEach(message => {
-                result += JSON.stringify({date: new Date().toISOString(), message, type});
+                result += JSON.stringify({date: new Date().toISOString(), message, type}) + '\n'
             })
         }
         fs.appendFileSync(filePath, result);

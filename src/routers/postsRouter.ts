@@ -3,21 +3,21 @@ import {postControllerEmbedded as controller} from "../controllers/PostControlle
 
 export const postsRouter = express.Router();
 
-postsRouter.get("/", (req, res) => {
+postsRouter.get("/", (req, res, next) => {
     if(Object.keys(req.query).length)
-        controller.getPostById(req, res);
+        controller.getPostById(req, res, next);
     else
-        controller.getAllPosts(req, res);
+        controller.getAllPosts(req, res, next);
 })
 
-postsRouter.get("/user/:userName", (req, res) => {
-    controller.getPostsByUserName(req, res);
+postsRouter.get("/user/:userName", (req, res, next) => {
+    controller.getPostsByUserName(req, res, next);
 })
 
-postsRouter.post("/", (req, res) => {
-    controller.addPost(req, res);
+postsRouter.post("/", (req, res, next) => {
+    controller.addPost(req, res, next);
 })
 
-postsRouter.delete("/",  (req, res) => {
-    controller.removePost(req, res);
+postsRouter.delete("/",  (req, res, next) => {
+    controller.removePost(req, res, next);
 })

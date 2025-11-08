@@ -3,21 +3,21 @@ import {userControllerEmbedded as controller} from "../controllers/UserControlle
 
 export const usersRouter = express.Router();
 
-usersRouter.get("/", (req, res) => {
+usersRouter.get("/", (req, res, next) => {
     if(Object.keys(req.query).length)
-        controller.getUserById(req, res)
+        controller.getUserById(req, res, next)
     else
-        controller.getAllUsers(req, res);
+        controller.getAllUsers(req, res, next);
 })
 
-usersRouter.post("/", (req, res) => {
-    controller.addUser(req, res);
+usersRouter.post("/", (req, res, next   ) => {
+    controller.addUser(req, res, next);
 })
 
-usersRouter.delete("/", (req, res) => {
-    controller.removeUser(req, res);
+usersRouter.delete("/", (req, res, next) => {
+    controller.removeUser(req, res, next);
 })
 
-usersRouter.patch("/", (req, res) => {
-    controller.updateUser(req, res);
+usersRouter.patch("/", (req, res, next) => {
+    controller.updateUser(req, res,next);
 })

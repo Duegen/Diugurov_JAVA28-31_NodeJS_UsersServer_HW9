@@ -1,4 +1,5 @@
 import express from 'express'
+import {Request} from "express";
 import {apiRouter} from "./routers/apiRouter.js";
 import {myLogger} from "./utiles/logger.js";
 import {errorHandler} from "./errorHandler/errorHandler.js";
@@ -6,6 +7,13 @@ import {PORT} from "./config/appConfig.js";
 import {databaseControllerEmbedded as database} from "./controllers/DatabaseController.js";
 import {userServiceEmbedded} from "./service/UserServiceEmbedded.js";
 import {postServiceEmbedded} from "./service/PostServiceEmbedded.js";
+import {loggerMW} from "./utiles/loggerMW.js";
+
+export interface loggedRequest extends Request {
+    message?: string
+    source?: string
+    flagLog?: boolean
+}
 
 export const launchServer = async () => {
     const app = express();
@@ -31,6 +39,7 @@ export const launchServer = async () => {
         response.status(404).send("Page not found")
     })
     app.use(errorHandler);
+    app.use(loggerMW)
 
     process.on('SIGINT', shutdown); //server stopped by Ctrl+C
     process.on('uncaughtException', handleFatalError);

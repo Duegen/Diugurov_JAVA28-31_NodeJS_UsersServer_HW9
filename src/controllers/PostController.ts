@@ -1,9 +1,9 @@
 import {PostService} from "../service/PostService.js";
-import {Request, Response} from "express";
+import {NextFunction, Response} from "express";
 import {postServiceEmbedded} from "../service/PostServiceEmbedded.js";
 import {HttpError} from "../errorHandler/HttpError.js";
 import {postIdShema, postNameShema, postShema} from "../joiShemas/postShema.js";
-import {myLogger} from "../utiles/logger.js";
+import {loggedRequest} from "../server.js";
 
 export class PostController {
 
@@ -11,66 +11,76 @@ export class PostController {
 
     }
 
-    getAllPosts(req: Request, res: Response){
+    getAllPosts(req: loggedRequest, res: Response, next: NextFunction) {
         const result = this.postService.getAllPosts();
-        if(result){
+        req.source = 'getAllPosts';
+        if (result) {
             res.status(200).send(result)
-            myLogger.logfileExist() ? myLogger.saveToFile("all posts are responsed",'getAllPosts')
-                : myLogger.save("all posts are responsed",'getAllPosts')
-        }
-        else{
+            req.message = "all posts are responsed";
+            req.flagLog = true;
+        } else {
             res.status(200).send('post list is empty@getAllPosts');
-            myLogger.log("post list is empty",'getAllPosts')
+            req.message = "post list is empty";
+            req.flagLog = false;
         }
+        next()
     }
 
-    getPostById(req: Request, res: Response){
+    getPostById(req: loggedRequest, res: Response, next: NextFunction) {
         const {error} = postIdShema.validate(req.query);
-        if(error) throw new HttpError(400, error.message, 'getPostById')
+        if (error) throw new HttpError(400, error.message, 'getPostById')
 
         const result = this.postService.getPostById(+req.query.postId!);
-        if(result){
+        if (result) {
             res.status(200).send(result);
-            myLogger.logfileExist() ? myLogger.saveToFile(`post with postId ${req.query.postId} is responsed`,'getPostById')
-                : myLogger.save(`post with postId ${req.query.postId} is responsed`,'getPostById')
+            req.message = `post with postId ${req.query.postId} is responsed`;
+            req.source = 'getPostById';
+            req.flagLog = true;
         }
+        next()
     }
 
-    getPostsByUserName(req: Request, res: Response){
+    getPostsByUserName(req: loggedRequest, res: Response, next: NextFunction) {
         const {error} = postNameShema.validate(req.params);
-        if(error) throw new HttpError(400, error.message, 'getPostsByUserName')
+        if (error) throw new HttpError(400, error.message, 'getPostsByUserName')
 
         const result = this.postService.getPostsByUserName(req.params.userName)
-        if(result){
+        if (result) {
             res.status(200).send(result);
-            myLogger.logfileExist() ? myLogger.saveToFile(`posts of users with name '${req.params.userName}' are responsed`,'getPostsByUserName')
-                : myLogger.save(`posts of users with name '${req.params.userName}' are responsed`,'getPostsByUserName')
+            req.message = `posts of users with name '${req.params.userName}' are responsed`;
+            req.source = 'getPostsByUserName';
+            req.flagLog = true;
         }
+        next()
     }
 
-    addPost(req: Request, res: Response){
+    addPost(req: loggedRequest, res: Response, next: NextFunction) {
         const body = req.body;
         const {error} = postShema.validate(body);
-        if(error) throw new HttpError(400, error.message, 'addPost')
+        if (error) throw new HttpError(400, error.message, 'addPost')
 
         const result = this.postService.addPost(req.body);
-        if (result){
+        if (result) {
             res.status(200).send(result);
-            myLogger.logfileExist() ? myLogger.saveToFile(`post with postId ${req.query.postId} is successfully added`,'addPost')
-                : myLogger.save(`post with postId ${req.query.postId} is successfully added`,'addPost')
+            req.message = `post with postId ${body.postId} is successfully added`
+            req.source = 'addPost';
+            req.flagLog = true;
         }
+        next()
     }
 
-    removePost(req: Request, res:Response){
+    removePost(req: loggedRequest, res: Response, next: NextFunction) {
         const {error} = postIdShema.validate(req.query);
-        if(error) throw new HttpError(400, error.message, 'removePost')
+        if (error) throw new HttpError(400, error.message, 'removePost')
 
         const result = this.postService.removePost(+req.query.postId!);
-        if (result){
+        if (result) {
             res.status(200).send(result);
-            myLogger.logfileExist() ? myLogger.saveToFile(`post with postId ${req.query.postId} is removed`,'removePost')
-                : myLogger.save(`post with postId ${req.query.postId} is removed`,'removePost')
+            req.message = `post with postId ${req.query.postId} is removed`
+            req.source = 'removePost';
+            req.flagLog = true;
         }
+        next()
     }
 }
 

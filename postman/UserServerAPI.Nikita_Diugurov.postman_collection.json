@@ -1,0 +1,318 @@
+{
+	"info": {
+		"_postman_id": "93ab1699-2204-497a-9613-1593ef8f5a09",
+		"name": "UsersServer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49500476",
+		"_collection_link": "https://nikitadyugurov-9078756.postman.co/workspace/NodeJS~baf53c5a-4449-4e86-a734-fa98b3916627/collection/49500476-93ab1699-2204-497a-9613-1593ef8f5a09?action=share&source=collection_link&creator=49500476"
+	},
+	"item": [
+		{
+			"name": "usersApi",
+			"item": [
+				{
+					"name": "GetAllUsers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3055/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3055",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUserById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3055/api/users?userId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3055",
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 2,\r\n    \"userName\":\"Piter\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3055/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3055",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUser",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3055/api/users?userId=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3055",
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUser",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":1,\r\n    \"userName\":\"John\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3055/api/users?userId=2&newName=Garry",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3055",
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "2"
+								},
+								{
+									"key": "newName",
+									"value": "Garry"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "postsApi",
+			"item": [
+				{
+					"name": "getAllPosts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3055/api/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3055",
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPostById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3055/api/posts?postId=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3055",
+							"path": [
+								"api",
+								"posts"
+							],
+							"query": [
+								{
+									"key": "postId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPostByUserName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3055/api/posts/user/Bond",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3055",
+							"path": [
+								"api",
+								"posts",
+								"user",
+								"Bond"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addPost",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"postId\": 10,\r\n    \"userId\": 1,\r\n    \"title\": \"Post 10\",\r\n    \"text\": \"Smth about theme Post 10\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3055/api/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3055",
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "removePost",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3055/api/posts?postId=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3055",
+							"path": [
+								"api",
+								"posts"
+							],
+							"query": [
+								{
+									"key": "postId",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GetLog",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3055/api/logger",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3055",
+					"path": [
+						"api",
+						"logger"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "404",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3055/page",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3055",
+					"path": [
+						"page"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

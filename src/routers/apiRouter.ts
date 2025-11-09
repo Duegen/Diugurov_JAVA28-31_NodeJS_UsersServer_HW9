@@ -6,5 +6,5 @@ import {postsRouter} from "./postsRouter.js";
 export const apiRouter = express.Router();
 
 apiRouter.use('/users', usersRouter);
-apiRouter.use('/logger',loggerRouter);
+apiRouter.use('/logger', loggerRouter);
 apiRouter.use('/posts', postsRouter);

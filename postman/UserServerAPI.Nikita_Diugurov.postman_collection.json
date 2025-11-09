@@ -225,7 +225,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"postId\": 10,\r\n    \"userId\": 1,\r\n    \"title\": \"Post 10\",\r\n    \"text\": \"Smth about theme Post 10\"\r\n}",
+							"raw": "{\r\n    \"postId\": 6,\r\n    \"userId\": 1,\r\n    \"title\": \"Post 6\",\r\n    \"text\": \"Smth about theme Post 6\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -253,7 +253,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3055/api/posts?postId=10",
+							"raw": "http://localhost:3055/api/posts?postId=5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -266,7 +266,7 @@
 							"query": [
 								{
 									"key": "postId",
-									"value": "10"
+									"value": "5"
 								}
 							]
 						}
@@ -290,6 +290,32 @@
 					"path": [
 						"api",
 						"logger"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getLogByType",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3055/api/logger?type=service",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3055",
+					"path": [
+						"api",
+						"logger"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "service"
+						}
 					]
 				}
 			},
